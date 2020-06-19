@@ -12,9 +12,27 @@ A 2048 game api for training supervised learning (imitation learning) or reinfor
 * [`webapp.py`](webapp.py): run the web app (backend) demo.
 * [`evaluate.py`](evaluate.py): evaluate your self-defined agent.
 
+## The folders and codes I added
+
+* [`checkpoints/`](checkpoints/): checkpoints for models.
+    * [`checkpoint.hdf5`](checkpoints/checkpoint.hdf5): final RNN + CNN model weights.
+    * [`CNN/`](checkpoints/CNN/): checkpoints for reference CNN model.
+* [`models/`](models/): some used models and function.
+    * [`Final_Model.py`](models/Final_Model.py): the final RNN + CNN model I used.
+    * [`CRNN_model.py`](models/CRNN_model.py): a CNN + RNN model.
+    * [`RNN_model.py`](models/RNN_model.py): a RNN model.
+    * [`refer_model.py`](models/refer_model.py): a CNN model.
+    * [`get_data.py`](models/get_data.py): some data generators for different models.
+* [`2048_train_test.ipynb`](2048_train_test.ipynb): colab notebook to train and test my [`Final Model`](models/Final_Model.py), you can download the DATA.csv [here](https://drive.google.com/file/d/1OsQVtG928QCleouxwS8Wm37Xo99eIl7X/view?usp=sharing).
+* [`MyAgent.py`](MyAgent.py): the agent that I inherited from [agents.py](game2048/agents.py), and it's the agent that I finally implemented.
+* [`test_model.py`](test_model.py): one game test.
+* [`train_model_with_DATA.py`](train_model_with_DATA.py): training the model with DATA.csv.
+* [`train_model_with_generator.py`](train_model_with_generator.py): training the model with generator from [get_data.py](models.get_data.py).
+
 # Requirements
 * code only tested on linux system (ubuntu 16.04)
 * Python 3 (Anaconda 3.6.3 specifically) with numpy and flask
+* tensorflow 2.0 and Keras
 
 # To define your own agents
 ```python
@@ -31,6 +49,17 @@ class YourOwnAgent(Agent):
         direction = some_function(self.game)
         return direction
 
+```
+
+# To use my agent, models or generators
+```python
+from MyAgent import MyAgent
+
+from models.Final_Model import RCNN_model
+# ...
+
+from models.get_data import data_generator
+# ...
 ```
 
 # To compile the pre-defined ExpectiMax agent
